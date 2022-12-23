@@ -52,7 +52,7 @@
              <h1 class="text-center" style="font-family: 'Unbounded', cursive;">Listado de Socios</h1>
             <br>
             <div class="row">
-                <table class="table table-primary table-striped""> 
+                <table class="table table-primary table-striped"> 
                     <thead>
                         <th>Id</th>
                         <th>Nombre</th>
@@ -70,33 +70,34 @@
                         SociosDAO s1=new SociosDAO();
                         resultado=s1.listarSocios();
                         
-                        for(int x=0;x<resultado.size();x++)
+                        for(int i=0;i<resultado.size();i++)
                         {
-                        String ruta="SociosController?accion=modificar&id=resultado.get(x).getIdSocio()";
-                        String rutaE="SociosController?accion=eliminar&id=resultado.get(x).getIdSocio()";
-                    
+                        String ruta="SociosController?accion=modificar&idSocio=resultado.get(i).getIdSocio()";
+                        String rutaE="SociosController?accion=eliminar&idSocio=resultado.get(i).getIdSocio()";                 
                     %>
                     
                     <tr>
-                        <td><%=resultado.get(x).getIdSocio()%></td>
-                        <td><%=resultado.get(x).getNombre()%></td>
-                        <td><%=resultado.get(x).getApellido()%></td>
-                        <td><%=resultado.get(x).getDireccion()%></td>
-                        <td><%=resultado.get(x).getLocalidad()%></td>
-                        <td><%=resultado.get(x).getFnac()%></td>
-                        <td><%=resultado.get(x).getTelefono()%></td>
-                        <td><%=resultado.get(x).getMail()%></td>
+                        <td><%=resultado.get(i).getIdSocio()%></td>
+                        <td><%=resultado.get(i).getNombre()%></td>
+                        <td><%=resultado.get(i).getApellido()%></td>
+                        <td><%=resultado.get(i).getDireccion()%></td>
+                        <td><%=resultado.get(i).getLocalidad()%></td>
+                        <td><%=resultado.get(i).getFnac()%></td>
+                        <td><%=resultado.get(i).getTelefono()%></td>
+                        <td><%=resultado.get(i).getMail()%></td>
                         <td><a href=<%=ruta%>><i class="fa-sharp fa-solid fa-pencil"></i></a></td>
                         <td><a href=<%=rutaE%>><i class="fa-sharp fa-solid fa-trash-can"></i></a></td>
                     </tr>
                     <%
-                        }
+                    }
                     %>
                 </table>
                 <br>
                 <div class="row container justify-content-center">
-                        <button class="btn btn-primary col-md-5 enviar" id="enviar" type="button">Agregar Socio</button>
+                    <button class="btn btn-primary col-md-5 enviar" id="enviar" type="button">Agregar Socio</button>
                     </div> 
+                    
+                    
             </div>
             
         </div>

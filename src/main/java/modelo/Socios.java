@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -22,8 +23,9 @@ public class Socios
   private String telefono;
   private boolean activo;
 
-    public Socios(int isSocio, String nombre, String apellido, String direccion, String localidad, LocalDate fnac, String mail, String telefono, boolean activo) {
-        this.idSocio = isSocio;
+    public Socios(int idSocio, String nombre, String apellido, String direccion, String localidad, LocalDate fnac, String mail, String telefono, boolean activo) 
+    {
+        this.idSocio = idSocio;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;

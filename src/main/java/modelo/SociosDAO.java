@@ -6,6 +6,7 @@ package modelo;
 
 import config.Conexion;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class SociosDAO
 {
     Connection conexion;
     
-    public SociosDAO ()
+    public SociosDAO () throws ClassNotFoundException
     {
        Conexion con=new Conexion(); 
        conexion=con.getConnection();
@@ -36,11 +37,11 @@ public class SociosDAO
         try
         {
            ps=conexion.prepareStatement("select * from socios");
-           rs=ps.executeQuery (); 
+           rs=ps.executeQuery(); 
            
            while(rs.next())
            {
-               int id=rs.getInt("Id Socio");
+               int idSocio=rs.getInt("idSocio");
                String nombre=rs.getString("nombre");
                String apellido=rs.getString("apellido");
                String direccion=rs.getString("direccion");
@@ -50,20 +51,22 @@ public class SociosDAO
                String telefono=rs.getString("telefono");
                boolean activo=rs.getBoolean("activo");
                
-               Socios s1=new Socios(id,nombre,apellido,direccion,localidad,fnac,mail,telefono,activo);
+               Socios s1=new Socios(idSocio,nombre,apellido,direccion,localidad,fnac,mail,telefono,activo);
                lista.add(s1);
            }
-           
-           return lista;
+          
         }
         catch(SQLException e)
         {
             System.out.println(e);
-            return null;
+            //return null;
         }
+        
+        return lista;
+        
     }
     
-    public Socios mostrarSocio(int _id)
+    public Socios mostrarSocio(int _idSocio)
     {
      PreparedStatement ps;
      ResultSet rs;
@@ -71,13 +74,13 @@ public class SociosDAO
         
         try
         {
-           ps=conexion.prepareStatement("select * from socios where id=?");
-           ps.setInt(1, _id);
+           ps=conexion.prepareStatement("select * from socios where idSocio=?");
+           ps.setInt(1, _idSocio);
            rs=ps.executeQuery(); 
            
            while(rs.next())
            {
-               int id=rs.getInt("Id Socio");
+               int idSocio=rs.getInt("idSocio");
                String nombre=rs.getString("nombre");
                String apellido=rs.getString("apellido");
                String direccion=rs.getString("direccion");
@@ -87,7 +90,7 @@ public class SociosDAO
                String telefono=rs.getString("telefono");
                boolean activo=rs.getBoolean("activo");
                
-               s1=new Socios(id,nombre,apellido,direccion,localidad,fnac,mail,telefono,activo);
+               s1=new Socios(idSocio,nombre,apellido,direccion,localidad,fnac,mail,telefono,activo);
                
            }
            
@@ -107,7 +110,7 @@ public class SociosDAO
         
         try
         {
-            ps=conexion.prepareStatement("insert into socios (nombre, apellido,direccion,localidad,fnac,mail,telefono,activo) value (?,?,?,?,?,?,?,t)");
+            ps=conexion.prepareStatement("insert into socios (nombre,apellido,direccion,localidad,fnac,mail,telefono,activo) value (?,?,?,?,?,?,?,?)");
             ps.setString(1,s1.getNombre());
             ps.setString(2,s1.getApellido());
             ps.setString(3,s1.getDireccion());
@@ -140,6 +143,8 @@ public class SociosDAO
             ps.setString(6,s1.getMail());
             ps.setString(7,s1.getTelefono());
             ps.setBoolean(8,s1.isActivo());
+            ps.setInt(9, s1.getIdSocio());
+            ps.execute();
             return true;
         }     
         
@@ -150,14 +155,15 @@ public class SociosDAO
         }
     }
     
-    public boolean eliminarSocios(int id)
+    public boolean eliminarSocios(int idSocio)
     {
         PreparedStatement ps;
         
         try
         {
-            ps=conexion.prepareStatement("delete from socios where id=?)");
-            ps.setInt(1,id);
+            ps=conexion.prepareStatement("delete from socios where idSocio=?)");
+            ps.setInt(1,idSocio);
+            ps.execute();
             return true;
         }     
         

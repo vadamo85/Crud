@@ -9,7 +9,12 @@ package config;
  * @author Valelita
  */
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class Conexion 
 {
@@ -47,10 +52,10 @@ rs=ps.executeQuery();
 
 while(rs.next())
 {
-int id=rs.getInt("idSocio");
+int idSocio=rs.getInt("idSocio");
 String apellido=rs.getString("apellido");
 
-System.out.println("ID: "+id+" Apellido: "+apellido);
+System.out.println("ID: "+idSocio+" Apellido: "+apellido);
 }
 
 }

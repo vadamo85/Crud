@@ -5,7 +5,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +19,8 @@ import modelo.SociosDAO;
  *
  * @author Valelita
  */
+//@WebServlet(name = "SociosController", urlPatterns = {"/SociosController"})
+
 public class SociosController extends HttpServlet 
 {
     public SociosController()
@@ -27,56 +28,60 @@ public class SociosController extends HttpServlet
                 super();
             
             }
-    
-
-    
-     
+         
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
         SociosDAO sociosDAO=null;
-        sociosDAO=new SociosDAO();
+        try
+            {
+                sociosDAO=new SociosDAO();
+            }
+        catch (ClassNotFoundException e)
+            {
+               e.printStackTrace();     
+            }        
         
         String accion;
+        RequestDispatcher dispatcher=null;
         accion=request.getParameter("accion");
-        RequestDispatcher dispacher=null;
-        
+                
         if(accion==null||accion.isEmpty())
         {
-            dispacher=request.getRequestDispatcher("vistas/socios.jsp");
+            dispatcher=request.getRequestDispatcher("vistas/socios.jsp");
         }
         
         else if(accion.equals("modificar"))
         {
-          dispacher=request.getRequestDispatcher("vistas/modificar.jsp");
+          dispatcher=request.getRequestDispatcher("vistas/modificar.jsp");
         }
         
         else if(accion.equals("actualizar"))
         {
-          int id=Integer.parseInt(request.getParameter("id"));
+          int idSocio=Integer.parseInt(request.getParameter("idSocio"));
           String nombre=request.getParameter("nombre");
           String apellido=request.getParameter("apellido");
           String direccion=request.getParameter("direccion");
           String localidad=request.getParameter("localidad");            
           LocalDate fecha =LocalDate.parse(request.getParameter("fnac"));                 
-          String email=request.getParameter("mail");
+          String mail=request.getParameter("mail");
           String telefono=request.getParameter("telefono");                                    
-          Socios s1=new Socios(id,nombre,apellido,direccion,localidad,fecha,email,telefono,true);
+          Socios s1=new Socios(idSocio,nombre,apellido,direccion,localidad,fecha,mail,telefono,true);
           sociosDAO.actualizarSocios(s1);
-	  dispacher=request.getRequestDispatcher("vistas/socios.jsp");	
+	  dispatcher=request.getRequestDispatcher("vistas/socios.jsp");	
         }
         
         else if(accion.equals("eliminar"))
         {
-           int id=Integer.parseInt(request.getParameter("Id"));
-           sociosDAO.eliminarSocios(id);
-           dispacher=request.getRequestDispatcher("vistas/socios.jsp");
+           int idSocio=Integer.parseInt(request.getParameter("IdSocio"));
+           sociosDAO.eliminarSocios(idSocio);
+           dispatcher=request.getRequestDispatcher("vistas/socios.jsp");
         }        
         
         else if(accion.equals("nuevo"))
 		{
-			dispacher=request.getRequestDispatcher("vistas/nuevo.jsp");
+			dispatcher=request.getRequestDispatcher("vistas/nuevo.jsp");
 		}
 		
         else if(accion.equals("insert"))
@@ -86,26 +91,26 @@ public class SociosController extends HttpServlet
                     String direccion=request.getParameter("direccion");
                     String localidad=request.getParameter("localidad");            
                     LocalDate fecha =LocalDate.parse(request.getParameter("fnac"));                 
-                    String email=request.getParameter("mail");
+                    String mail=request.getParameter("mail");
                     String telefono=request.getParameter("telefono");                                     
-                    Socios s1=new Socios(0,nombre,apellido,direccion,localidad,fecha,email,telefono,true);
+                    Socios s1=new Socios(0,nombre,apellido,direccion,localidad,fecha,mail,telefono,true);
 		    sociosDAO.insertarSocios(s1);
-	            dispacher=request.getRequestDispatcher("vistas/socios.jsp");
+	            dispatcher=request.getRequestDispatcher("vistas/socios.jsp");
 		}
         
-        dispacher.forward(request,response);
+        dispatcher.forward(request,response);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+  
+ @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         doGet(request,response);
     }
 
     @Override
-    public String getServletInfo() {
+    public String getServletInfo() 
+    {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
+    

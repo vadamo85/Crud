@@ -6,6 +6,7 @@
 
 <%@page import="modelo.SociosDAO"%>
 <%@page import="modelo.Socios"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -55,12 +56,12 @@
             <div class="row">
                 
                 <%
-                    String id=request.getParameter("id");
+                    String idSocio=request.getParameter("idSocio");
                     int mid;
-                    mid=Integer.parseInt(id);
+                    mid=Integer.parseInt(idSocio);
                     Socios resultado=null;
-                    SociosDAO s1=new SociosDAO();
-                    resultado=s1.mostrarSocio(mid);
+                    SociosDAO socio=new SociosDAO();
+                    resultado=socio.mostrarSocio(mid);
                 %>
                 
                 <form class="p-5" method="post" action="SociosController?accion=actualizar">
