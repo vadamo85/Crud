@@ -74,7 +74,7 @@
                         <br>
                     </div> 
                     <div class="row container justify-content-center">
-                        <button class="btn btn-primary col-md-5 enviar" id="enviar" type="button">¡Hacete Socio!</button>
+                        <button class="btn btn-primary col-md-5" type="submit">¡Hacete Socio!</button>
                     </div> 
                 </form>
             </div>

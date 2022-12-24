@@ -56,9 +56,10 @@
                     <thead>
                         <th>Id</th>
                         <th>Nombre</th>
-                        <th>Aéllido</th>
+                        <th>Apellido</th>
                         <th>Dirección</th>
                         <th>Localidad</th>
+                        <th>Fecha de nacimiento</th>
                         <th>Mail</th>
                         <th>Teléfono</th>
                         <th>Modificar</th>
@@ -72,8 +73,9 @@
                         
                         for(int i=0;i<resultado.size();i++)
                         {
-                        String ruta="SociosController?accion=modificar&idSocio=resultado.get(i).getIdSocio()";
-                        String rutaE="SociosController?accion=eliminar&idSocio=resultado.get(i).getIdSocio()";                 
+                        String ruta="SociosController?accion=modificar&idSocio="+resultado.get(i).getIdSocio();
+                        String rutaE="SociosController?accion=eliminar&idSocio="+resultado.get(i).getIdSocio();
+                        String rutaA="SociosController?accion=insertar&idSocio="+resultado.get(i).getIdSocio();
                     %>
                     
                     <tr>
@@ -94,7 +96,7 @@
                 </table>
                 <br>
                 <div class="row container justify-content-center">
-                    <button class="btn btn-primary col-md-5 enviar" id="enviar" type="button">Agregar Socio</button>
+                    <button href="SociosController?accion=nuevo" class="btn btn-primary col-md-5">Agregar Socio</button>
                     </div> 
                     
                     

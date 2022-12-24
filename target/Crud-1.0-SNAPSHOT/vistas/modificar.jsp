@@ -92,7 +92,7 @@
                         <br>
                     </div> 
                     <div class="row container justify-content-center">
-                        <button class="btn btn-primary col-md-5 enviar" id="enviar" type="button">¡Actualizar mis datos ahora!</button>
+                        <button type="submit" class="btn btn-primary col-md-5">¡Actualizar mis datos ahora!</button>
                     </div> 
                 </form>
             </div>

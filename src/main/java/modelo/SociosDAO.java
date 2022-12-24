@@ -134,7 +134,7 @@ public class SociosDAO
         
         try
         {
-            ps=conexion.prepareStatement("update socios set nombre=?,apellido=?,direccion=?,localidad=?,fnac=?,mail=?,telefono=?,activo=?)");
+            ps=conexion.prepareStatement("update socios set nombre=?,apellido=?,direccion=?,localidad=?,fnac=?,mail=?,telefono=?,activo=?");
             ps.setString(1,s1.getNombre());
             ps.setString(2,s1.getApellido());
             ps.setString(3,s1.getDireccion());
@@ -161,7 +161,7 @@ public class SociosDAO
         
         try
         {
-            ps=conexion.prepareStatement("delete from socios where idSocio=?)");
+            ps=conexion.prepareStatement("delete from socios where idSocio=?");
             ps.setInt(1,idSocio);
             ps.execute();
             return true;

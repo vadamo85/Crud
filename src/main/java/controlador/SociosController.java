@@ -74,7 +74,7 @@ public class SociosController extends HttpServlet
         
         else if(accion.equals("eliminar"))
         {
-           int idSocio=Integer.parseInt(request.getParameter("IdSocio"));
+           int idSocio=Integer.parseInt(request.getParameter("idSocio"));
            sociosDAO.eliminarSocios(idSocio);
            dispatcher=request.getRequestDispatcher("vistas/socios.jsp");
         }        
@@ -100,7 +100,7 @@ public class SociosController extends HttpServlet
         
         dispatcher.forward(request,response);
     }
-  
+    
  @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
