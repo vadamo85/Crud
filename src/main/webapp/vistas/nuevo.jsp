@@ -73,8 +73,8 @@
                         <input type="text" class="form-control" name="telefono" id="telefono" required placeholder="Ej: 23568974">
                         <br>
                     </div> 
-                    <div class="row container justify-content-center">
-                        <button class="btn btn-primary col-md-5" type="submit">¡Hacete Socio!</button>
+                    <div class="row container-fluid justify-content-center">
+                        <a href="SociosController?accion=insert"><input type="button" class="btn btn-primary col-md-5" value="¡Hacete Socio!"></a>
                     </div> 
                 </form>
             </div>

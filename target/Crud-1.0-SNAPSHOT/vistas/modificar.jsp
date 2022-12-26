@@ -92,7 +92,7 @@
                         <br>
                     </div> 
                     <div class="row container justify-content-center">
-                        <button type="submit" class="btn btn-primary col-md-5">¡Actualizar mis datos ahora!</button>
+                        <a href="SociosController?accion=actualizar"><input type="button" class="btn btn-primary col-md-5" value="¡Actualizar mis datos ahora!"></a>
                     </div> 
                 </form>
             </div>

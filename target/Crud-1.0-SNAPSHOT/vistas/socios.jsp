@@ -95,8 +95,8 @@
                     %>
                 </table>
                 <br>
-                <div class="row container justify-content-center">
-                    <button href="SociosController?accion=nuevo" class="btn btn-primary col-md-5">Agregar Socio</button>
+                <div class="row container-fluid justify-content-center">
+                    <a href="SociosController?accion=nuevo"><input type="button" class="btn btn-primary col-md-5" value="Agregar Socio"></a>
                     </div> 
                     
                     
