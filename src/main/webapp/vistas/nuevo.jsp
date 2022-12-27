@@ -74,7 +74,7 @@
                         <br>
                     </div> 
                     <div class="row container-fluid justify-content-center">
-                        <a href="SociosController?accion=insert"><input type="button" class="btn btn-primary col-md-5" value="¡Hacete Socio!"></a>
+                        <a href="SociosController?accion=insert"><input type="button submit" class="btn btn-primary col-md-5" value="¡Hacete Socio!"></a>
                     </div> 
                 </form>
             </div>

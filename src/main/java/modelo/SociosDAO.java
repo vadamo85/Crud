@@ -118,6 +118,8 @@ public class SociosDAO
             ps.setObject(5,s1.getFnac());
             ps.setString(6,s1.getMail());
             ps.setString(7,s1.getTelefono());
+            ps.setBoolean(8, true);
+            ps.execute();
             return true;
         }     
         
