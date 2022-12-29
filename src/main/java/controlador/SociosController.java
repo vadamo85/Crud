@@ -6,6 +6,8 @@ package controlador;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,16 +25,25 @@ import modelo.SociosDAO;
 
 public class SociosController extends HttpServlet 
 {
+   //Get SQL date instance
+java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
+
+//Get LocalDate from SQL date
+LocalDate localDate = sqlDate.toLocalDate(); 
+
+
     public SociosController()
             {
                 super();
-            
             }
          
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
         SociosDAO sociosDAO=null;
         try
             {
@@ -41,8 +52,8 @@ public class SociosController extends HttpServlet
         catch (ClassNotFoundException e)
             {
                e.printStackTrace();     
-            }        
-        
+            } 
+                
         String accion;
         RequestDispatcher dispatcher=null;
         accion=request.getParameter("accion");
@@ -64,12 +75,12 @@ public class SociosController extends HttpServlet
           String apellido=request.getParameter("apellido");
           String direccion=request.getParameter("direccion");
           String localidad=request.getParameter("localidad");            
-          LocalDate fecha =LocalDate.parse(request.getParameter("fnac"));                 
+          LocalDate fecha =LocalDate.parse(request.getParameter("fnac"),formatter);                
           String mail=request.getParameter("mail");
           String telefono=request.getParameter("telefono");                                    
           Socios s1=new Socios(idSocio,nombre,apellido,direccion,localidad,fecha,mail,telefono,true);
           sociosDAO.actualizarSocios(s1);
-	  dispatcher=request.getRequestDispatcher("vistas/socios.jsp");	
+	  dispatcher=request.getRequestDispatcher("vistas/socios.jsp");		
         }
         
         else if(accion.equals("eliminar"))
@@ -90,18 +101,18 @@ public class SociosController extends HttpServlet
                     String apellido=request.getParameter("apellido");
                     String direccion=request.getParameter("direccion");
                     String localidad=request.getParameter("localidad");            
-                    LocalDate fecha =LocalDate.parse(request.getParameter("fnac"));                 
+                    LocalDate fecha =LocalDate.parse(request.getParameter("fnac"),formatter);  
                     String mail=request.getParameter("mail");
                     String telefono=request.getParameter("telefono");                                     
                     Socios s1=new Socios(0,nombre,apellido,direccion,localidad,fecha,mail,telefono,true);
 		    sociosDAO.insertarSocios(s1);
 	            dispatcher=request.getRequestDispatcher("vistas/socios.jsp");
-		}
-        
+                }
         dispatcher.forward(request,response);
+        
     }
-    
- @Override
+     
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         doGet(request,response);
@@ -112,5 +123,6 @@ public class SociosController extends HttpServlet
     {
         return "Short description";
     }
+    
 }
     
